@@ -9,7 +9,7 @@ import time
 import math
 import os
 
-SIMULATOR = Creature_Simulators.LeftRightSymmetricCapsuleQuadSimulator
+SIMULATOR = Creature_Simulators.LeftRightSymmetricWideFootQuad
 general_option = {'maxiter': 20, 'popsize': 16}
 DURATION = 7
 
