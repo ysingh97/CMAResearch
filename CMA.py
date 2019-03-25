@@ -9,9 +9,8 @@ import time
 import math
 import os
 
-SIMULATOR = Creature_Simulators.LeftRightSymmetricKneeQuadSimulator
-general_option = {'maxiter': 30, 'popsize': 12}
-
+SIMULATOR = Creature_Simulators.LeftRightSymmetricCapsuleQuadSimulator
+general_option = {'maxiter': 20, 'popsize': 16}
 DURATION = 7
 
 OPTIONS = general_option
@@ -181,8 +180,8 @@ if __name__=='__main__':
     #
     # # #
     testSimulator = SIMULATOR(res.xbest)
-
-    # testSimulator = SIMULATOR([0.388953675326296, -0.5316011427303715, 0.7757586098974393, 0.7809244676517587, 0.7404032879030341, 0.1757961363004723, 0.5374109587610162, 0.3905379032267321])
+    
+    # testSimulator = SIMULATOR([0.7836209831236303, -0.16423434196383951, -0.6143142684048242, 0.15412811281837824, -0.7113010821269045, 0.33841009752268114, 0.0872860286446461, -0.40288594526751526])
     # fitnessFunction([-0.514072698768841, 0.7563476359519834, 0.7082520951648874, 0.2749209360574305, -0.7602852837370209, -0.6225817927147496, 0.6219895615201269, 0.4865330914798499])
     pydart.gui.viewer.launch(testSimulator)
 

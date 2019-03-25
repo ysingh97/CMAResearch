@@ -239,3 +239,132 @@ class LRSymmetricPhaseKneeQuadController(object):
         # print("offset: ", offsetDirection)
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+# vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
+# frontshin_amplitude, frontshin_phase]
+class LeftRightSymmetricCapsuleQuadController(object):
+    def __init__(self, skel, vector):
+        self.skel = skel
+        self.target = None
+        self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
+        self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
+        self.vector = vector
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetPoint = rootNode.to_world([0, 1, 0]) - center
+        # print(center)
+        # print(offsetPoint)
+
+    def update_target_poses(self):
+        pose = self.skel.q
+        # if pose[4] < -.25:
+        #     print("below")
+        pose[('leg1_joint')] = self.periodic(self.vector[0], (3*math.pi)/2, self.vector[1])
+        pose[('leg2_joint')] = self.periodic(self.vector[0], (3*math.pi)/2, self.vector[1] - math.pi/2)
+        pose[('leg3_joint')] = self.periodic(self.vector[2], (3*math.pi)/2, self.vector[3])
+        pose[('leg4_joint')] = self.periodic(self.vector[2], (3*math.pi)/2, self.vector[3] - math.pi/2)
+        pose[('shin1_joint')] = self.periodic(self.vector[4], (3*math.pi)/2, self.vector[5])
+        pose[('shin2_joint')] = self.periodic(self.vector[4], (3*math.pi)/2, self.vector[5])
+        pose[('shin3_joint')] = self.periodic(self.vector[6], (3*math.pi)/2, self.vector[7])
+        pose[('shin4_joint')] = self.periodic(self.vector[6], (3*math.pi)/2, self.vector[7])
+        return pose
+
+    def periodic(self, amplitude, period, phase):
+        return (amplitude * np.sin(period * self.skel.world.t + phase))
+
+    def compute(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        offsetDirection = offsetDirection/np.linalg.norm(offsetDirection)
+        # print("center: ", center)
+        # print("offset: ", offsetDirection)
+        self.target = self.update_target_poses()
+        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+# vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
+# frontshin_amplitude, frontshin_phase, backfoot_amplitude, backfoot_phase, frontfoot_amplitude, frontfoot_phase]
+class LeftRightSymmetricWideFootQuadController(object):
+    def __init__(self, skel, vector):
+        self.skel = skel
+        self.target = None
+        self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
+        self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
+        self.vector = vector
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetPoint = rootNode.to_world([0, 1, 0]) - center
+        # print(center)
+        # print(offsetPoint)
+
+    def update_target_poses(self):
+        pose = self.skel.q
+        # if pose[4] < -.25:
+        #     print("below")
+        pose[('leg1_joint')] = self.periodic(self.vector[0], (3*math.pi)/2, self.vector[1])
+        pose[('leg2_joint')] = self.periodic(self.vector[0], (3*math.pi)/2, self.vector[1] - math.pi/2)
+        pose[('leg3_joint')] = self.periodic(self.vector[2], (3*math.pi)/2, self.vector[3])
+        pose[('leg4_joint')] = self.periodic(self.vector[2], (3*math.pi)/2, self.vector[3] - math.pi/2)
+        pose[('shin1_joint')] = self.periodic(self.vector[4], (3*math.pi)/2, self.vector[5])
+        pose[('shin2_joint')] = self.periodic(self.vector[4], (3*math.pi)/2, self.vector[5])
+        pose[('shin3_joint')] = self.periodic(self.vector[6], (3*math.pi)/2, self.vector[7])
+        pose[('shin4_joint')] = self.periodic(self.vector[6], (3*math.pi)/2, self.vector[7])
+        pose[('foot1_joint')] = self.periodic(self.vector[8]*(.3/(math.pi/4)), (3*math.pi)/2, self.vector[9])
+        pose[('foot2_joint')] = self.periodic(self.vector[8]*(.3/(math.pi/4)), (3*math.pi)/2, self.vector[9] - math.pi/2)
+        pose[('foot3_joint')] = self.periodic(self.vector[10]*(.3/(math.pi/4)), (3*math.pi)/2, self.vector[11])
+        pose[('foot4_joint')] = self.periodic(self.vector[10]*(.3/(math.pi/4)), (3*math.pi)/2, self.vector[11] - math.pi/2)
+        return pose
+
+    def periodic(self, amplitude, period, phase):
+        return (amplitude * np.sin(period * self.skel.world.t + phase))
+
+    def compute(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        offsetDirection = offsetDirection/np.linalg.norm(offsetDirection)
+        # print("center: ", center)
+        # print("offset: ", offsetDirection)
+        self.target = self.update_target_poses()
+        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+# vector: [backleg_amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
+# frontshin_amplitude, frontshin_phase]
+class SymmetricKneeQuadController(object):
+    def __init__(self, skel, vector):
+        self.skel = skel
+        self.target = None
+        self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
+        self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
+        self.vector = vector
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetPoint = rootNode.to_world([0, 1, 0]) - center
+        # print(center)
+        # print(offsetPoint)
+
+    def update_target_poses(self):
+        pose = self.skel.q
+        pose[('leg1_joint')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
+        pose[('leg2_joint')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
+        pose[('leg3_joint')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
+        pose[('leg4_joint')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
+        pose[('shin1_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
+        pose[('shin2_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
+        pose[('shin3_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        pose[('shin4_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        return pose
+
+    def periodic(self, amplitude, period, phase):
+        return (amplitude * np.sin(period * self.skel.world.t + phase))
+
+    def compute(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        offsetDirection = offsetDirection/np.linalg.norm(offsetDirection)
+        # print("center: ", center)
+        # print("offset: ", offsetDirection)
+        self.target = self.update_target_poses()
+        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
