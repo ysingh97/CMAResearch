@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<skel version="1.0">
+    <world name="world 1">
+        <physics>
+            <time_step>0.001</time_step>
+            <gravity>0 -9.81 0</gravity>
+            <collision_detector>dart</collision_detector>
+        </physics>
+
+       <skeleton name="grount skeleton">
+            <body name="ground">
+                <transformation>0 0 0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>200 .01 50</size>
+                        </box>
+                    </geometry>
+                    <color>0.95 0.95 0.95</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>200 0.01 50</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="joint 1">
+                <parent>world</parent>
+                <child>ground</child>
+            </joint>
+            <body name="cube1">
+                <transformation>0 -0.2 -1.0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>.5 .5 .5</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.7 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>8 0.05 5</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="cube1Joint">
+                <parent>world</parent>
+                <child>cube1</child>
+            </joint>
+            <body name="cube2">
+                <transformation>2.5 -0.2 -1.0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>.5 .5 .5</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.7 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>8 0.05 5</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="cube2Joint">
+                <parent>world</parent>
+                <child>cube2</child>
+            </joint>
+
+        </skeleton>
+
+
+
+        <skeleton name="box skeleton">
+            <transformation>0 .8 0 0 0 0</transformation>
+            <body name="shin1">
+                <gravity>1</gravity>
+                <transformation>.3 -.65 .2 1.57 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>.2</height>
+                            <radius>.05</radius>
+                        </capsule>
+                    </geometry>
+                    <color>0.0 1.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>.2</height>
+                            <radius>.05</radius>
+                        </capsule>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="free" name="body_joint">
+                <parent>world</parent>
+                <child>shin1</child>
+            </joint>
+
+           
+
+        </skeleton>
+    </world>
+</skel>
+

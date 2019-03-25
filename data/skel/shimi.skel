@@ -1,0 +1,313 @@
+<?xml version="1.0" ?>
+<skel version="1.0">
+    <world name="world 1">
+        <physics>
+            <time_step>0.001</time_step>
+            <gravity>0 0.0 0</gravity>
+            <collision_detector>bullet</collision_detector>
+        </physics>
+        
+        <skeleton name="ground skeleton">
+            <body name="ground">
+                <transformation>0 -0.375 0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 -0.005 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>10 0.01 10</size>
+                        </box>
+                    </geometry>
+                    <color>0.95 0.95 0.95</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 -0.005 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>10 0.01 10</size>
+                        </box>
+                    </geometry>
+                </collision_shape>                                
+            </body>
+            <joint type="weld" name="joint 1">
+                <parent>world</parent>
+                <child>ground</child>
+            </joint>
+        </skeleton> 
+        
+        
+        <skeleton name="shimi">
+            <body name="body">
+                <gravity>1</gravity>
+                <transformation>0.0 0.2 0 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.2 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.3 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.05 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="free" name="free">
+                <parent>world</parent>
+                <child>body</child>
+            </joint>
+
+            <body name="neckFiller">
+                <gravity>1</gravity>
+                <transformation>0.0 0.3 0 1.57 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.01 0.01 0.01</size>
+                        </box>
+                    </geometry>
+                    <color>0.3 0.8 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.05 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="weld" name="neckFillerBodyJoint">
+                <parent>world</parent>
+                <child>neckFiller</child>
+            </joint>
+
+
+
+            <body name="neck">
+                <gravity>1</gravity>
+                <transformation>0.0 0.375 0 1.57 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cylinder>
+                            <height>0.1</height>
+                            <radius>0.045</radius>
+                        </cylinder>
+                    </geometry>
+                    <color>0.6 0.6 0.8</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cylinder>
+                            <height>0.1</height>
+                            <radius>0.05</radius>
+                        </cylinder>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="universal" name="bodyNeckJoint">
+                <parent>neckFiller</parent>
+                <child>neck</child>
+                <transformation>0.0 0.0 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-1.0 0.0 0.0</xyz></axis>
+                <axis2> <xyz>0.0 0.0 -1.0</xyz></axis2>
+            </joint>
+
+            <body name="head">
+                <gravity>1</gravity>
+                <transformation>0.0 0.475 0 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <sphere>
+                            <radius>0.075</radius>
+                        </sphere>
+                    </geometry>
+                    <color>0.3 0.8 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <sphere>
+                            <radius>0.075</radius>
+                        </sphere>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="weld" name="headJoint">
+                <parent>neck</parent>
+                <child>head</child>
+            </joint>
+
+
+            <body name="leftEye">
+                <gravity>1</gravity>
+                <transformation>-.05 0.475 0 0 1.57 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cone>
+                            <height>0.15</height>
+                            <radius>0.075</radius>
+                        </cone>
+                    </geometry>
+                    <color>0.6 0.6 0.8</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cone>
+                            <height>0.1</height>
+                            <radius>0.05</radius>
+                        </cone>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="leftEyeJoint">
+                <parent>head</parent>
+                <child>leftEye</child>
+            </joint>
+
+            <body name="rightEye">
+                <gravity>1</gravity>
+                <transformation>.05 0.475 0 0 4.71 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cone>
+                            <height>0.15</height>
+                            <radius>0.075</radius>
+                        </cone>
+                    </geometry>
+                    <color>0.6 0.6 0.8</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <cone>
+                            <height>0.1</height>
+                            <radius>0.05</radius>
+                        </cone>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="weld" name="rightEyeJoint">
+                <parent>head</parent>
+                <child>rightEye</child>
+            </joint>
+
+
+
+
+
+
+
+            <body name="leftFoot">
+                <gravity>1</gravity>
+                <transformation>-.1 .075 .05 0 2.36 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>0.05</height>
+                            <radius>0.04</radius>
+                        </capsule>
+                    </geometry>
+                    <color>0.6 0.6 0.8</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>0.1</height>
+                            <radius>0.05</radius>
+                        </capsule>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="weld" name="leftFootJoint">
+                <parent>body</parent>
+                <child>leftFoot</child>
+            </joint>
+
+            <body name="rightFoot">
+                <gravity>1</gravity>
+                <transformation>.1 .075 .05 0 .786 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>0.05</height>
+                            <radius>0.04</radius>
+                        </capsule>
+                    </geometry>
+                    <color>0.6 0.6 0.8</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <capsule>
+                            <height>0.1</height>
+                            <radius>0.05</radius>
+                        </capsule>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="weld" name="rightFootJoint">
+                <parent>body</parent>
+                <child>rightFoot</child>
+            </joint>
+
+        </skeleton>
+        
+
+
+    </world>
+</skel>

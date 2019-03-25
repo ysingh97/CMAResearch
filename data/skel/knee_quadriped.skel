@@ -1,0 +1,397 @@
+<?xml version="1.0" ?>
+<skel version="1.0">
+    <world name="world 1">
+        <physics>
+            <time_step>0.001</time_step>
+            <gravity>0 -9.81 0</gravity>
+            <collision_detector>dart</collision_detector>
+        </physics>
+
+       <skeleton name="grount skeleton">
+            <body name="ground">
+                <transformation>0 0 0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>200 .01 50</size>
+                        </box>
+                    </geometry>
+                    <color>0.95 0.95 0.95</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>200 0.01 50</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="joint 1">
+                <parent>world</parent>
+                <child>ground</child>
+            </joint>
+            <body name="cube1">
+                <transformation>0 -0.2 -1.0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>.5 .5 .5</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.7 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>8 0.05 5</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="cube1Joint">
+                <parent>world</parent>
+                <child>cube1</child>
+            </joint>
+            <body name="cube2">
+                <transformation>2.5 -0.2 -1.0 0 0 0</transformation>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>.5 .5 .5</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.7 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>8 0.05 5</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+            <joint type="weld" name="cube2Joint">
+                <parent>world</parent>
+                <child>cube2</child>
+            </joint>
+
+        </skeleton>
+
+
+
+        <skeleton name="box skeleton">
+            <transformation>0 .8 0 0 0 0</transformation>
+            <body name="body">
+                <friction>.5</friction>
+                <gravity>1</gravity>
+                <transformation>0 0 0 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.7 0.5 0.5</size>
+                        </box>
+                    </geometry>
+                    <color>0.8 0.3 0.3</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.7 0.5 0.5</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+            <joint type="free" name="body_joint">
+                <parent>world</parent>
+                <child>body</child>
+            </joint>
+
+            <body name="leg1">
+                <gravity>1</gravity>
+                <transformation>.3 -.4 .2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 0.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="leg1_joint">
+                <transformation>-0.0 0.15 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>body</parent>
+                <child>leg1</child>
+             </joint>
+
+             <body name="shin1">
+                <gravity>1</gravity>
+                <transformation>.3 -.65 .2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 1.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="shin1_joint">
+                <transformation>-0.0 0.1 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>leg1</parent>
+                <child>shin1</child>
+             </joint>
+
+
+
+             <body name="leg2">
+                <gravity>1</gravity>
+                <transformation>.3 -.4 -.2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 .0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="leg2_joint">
+                <transformation>-0.0 0.15 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>body</parent>
+                <child>leg2</child>
+             </joint>
+
+             <body name="shin2">
+                <gravity>1</gravity>
+                <transformation>.3 -.65 -.2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 1.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="shin2_joint">
+                <transformation>-0.0 0.1 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>leg2</parent>
+                <child>shin2</child>
+             </joint>
+
+             <body name="leg3">
+                <gravity>1</gravity>
+                <transformation>-.3 -.4 .2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 0.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+             </body>
+
+             <joint type="revolute" name="leg3_joint">
+                <transformation>-0.0 0.15 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>body</parent>
+                <child>leg3</child>
+             </joint>
+
+             <body name="shin3">
+                <gravity>1</gravity>
+                <transformation>-.3 -.65 .2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 1.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="shin3_joint">
+                <transformation>-0.0 0.1 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>leg3</parent>
+                <child>shin3</child>
+             </joint>
+
+             <body name="leg4">
+                <gravity>1</gravity>
+                <transformation>-.3 -.4 -.2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 0.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.3 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="leg4_joint">
+                <transformation>0.0 0.15 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>body</parent>
+                <child>leg4</child>
+             </joint>
+
+             <body name="shin4">
+                <gravity>1</gravity>
+                <transformation>-.3 -.65 -.2 0 0 0</transformation>
+                <inertia>
+                    <mass>1</mass>
+                    <offset>0 0 0</offset>
+                </inertia>
+                <visualization_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                    <color>0.0 1.0 0.0</color>
+                </visualization_shape>
+                <collision_shape>
+                    <transformation>0 0 0 0 0 0</transformation>
+                    <geometry>
+                        <box>
+                            <size>0.1 0.2 0.1</size>
+                        </box>
+                    </geometry>
+                </collision_shape>
+            </body>
+
+             <joint type="revolute" name="shin4_joint">
+                <transformation>-0.0 0.1 0.0 0.0 0.0 0.0</transformation>
+                <axis> <xyz>-0.0 -0.0 -1.0</xyz></axis>
+                <parent>leg4</parent>
+                <child>shin4</child>
+             </joint>
+
+        </skeleton>
+
+
+
+
+
+
+    </world>
+</skel>
+
