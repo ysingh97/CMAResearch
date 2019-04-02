@@ -8,6 +8,7 @@ import multiprocessing as mp
 import time
 import math
 import os
+import sys
 
 SIMULATOR = Creature_Simulators.LeftRightSymmetricWideFootQuadSimulator
 general_option = {'maxiter': 20, 'popsize': 16}
@@ -160,19 +161,17 @@ def writeToFile(res, start, end):
 
 if __name__=='__main__':
     pydart.init()
-    if((len(sys.argv) > 2)):
-        general_option['maxiter'] = int(sys.argv[1])
-        general_option['popsize'] = int(sys.argv[2])
+    # print(len(sys.argv) > 2)
     OPTIONS['bounds'] = SIMULATOR.lb, SIMULATOR.hb
     path = os.getcwd() + PATH
-    print(os.getcwd())
-    print(PATH)
+    # print(os.getcwd())
+    # print(PATH)
     os.mkdir(path)
-    # # #
+    # # # #
     x0 = SIMULATOR.getX0(SIMULATOR)
-    # x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(SIMULATOR.numVars,))
+    # # x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(SIMULATOR.numVars,))
     print(x0)
-    # # #
+    # # # #
     start = time.time()
     res = run_CMA(x0)
     end = time.time()
@@ -182,10 +181,11 @@ if __name__=='__main__':
     #
     # # #
     testSimulator = SIMULATOR(res.xbest)
-    
-    # testSimulator = SIMULATOR([0.7836209831236303, -0.16423434196383951, -0.6143142684048242, 0.15412811281837824, -0.7113010821269045, 0.33841009752268114, 0.0872860286446461, -0.40288594526751526])
+    #
+    # testSimulator = SIMULATOR([-0.756631626452491, -0.6976371074891565, 0.326702368122124, 0.023886411254193662, 0.5538665019740683, -0.034577243195564496, -0.49390035708827223, 0.42601978553710296, -0.7577052062056908, 0.3979802257162822, 0.6148985530895368, 0.3092823456786025])
     # fitnessFunction([-0.514072698768841, 0.7563476359519834, 0.7082520951648874, 0.2749209360574305, -0.7602852837370209, -0.6225817927147496, 0.6219895615201269, 0.4865330914798499])
-    pydart.gui.viewer.launch(testSimulator)
+    pydart.gui.viewer.launch_pyqt5(testSimulator)
+
 
 
 
