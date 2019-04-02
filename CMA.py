@@ -160,7 +160,9 @@ def writeToFile(res, start, end):
 
 if __name__=='__main__':
     pydart.init()
-
+    if((len(sys.argv) > 2)):
+        general_option['maxiter'] = int(sys.argv[1])
+        general_option['popsize'] = int(sys.argv[2])
     OPTIONS['bounds'] = SIMULATOR.lb, SIMULATOR.hb
     path = os.getcwd() + PATH
     print(os.getcwd())
