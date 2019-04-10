@@ -92,7 +92,7 @@
                 <gravity>1</gravity>
                 <transformation>0 0 0 0 0 0</transformation>
                 <inertia>
-                    <mass>87.5</mass>
+                    <mass>1</mass>
                     <offset>0 0 0</offset>
                 </inertia>
                 <visualization_shape>
@@ -123,7 +123,7 @@
                 <gravity>1</gravity>
                 <transformation>.3 -.4 .2 0 0 0</transformation>
                 <inertia>
-                    <mass>1.5</mass>
+                    <mass>1</mass>
                     <offset>0 0 0</offset>
                 </inertia>
                 <visualization_shape>
@@ -222,7 +222,7 @@
                 <gravity>1</gravity>
                 <transformation>.3 -.4 -.2 0 0 0</transformation>
                 <inertia>
-                    <mass>1.5</mass>
+                    <mass>1</mass>
                     <offset>0 0 0</offset>
                 </inertia>
                 <visualization_shape>
@@ -321,7 +321,7 @@
                 <gravity>1</gravity>
                 <transformation>-.3 -.4 .2 0 0 0</transformation>
                 <inertia>
-                    <mass>1.5</mass>
+                    <mass>1</mass>
                     <offset>0 0 0</offset>
                 </inertia>
                 <visualization_shape>
@@ -420,7 +420,7 @@
                 <gravity>1</gravity>
                 <transformation>-.3 -.4 -.2 0 0 0</transformation>
                 <inertia>
-                    <mass>1.5</mass>
+                    <mass>1</mass>
                     <offset>0 0 0</offset>
                 </inertia>
                 <visualization_shape>
