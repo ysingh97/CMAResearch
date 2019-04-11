@@ -35,10 +35,15 @@ class SimpleQuadSimulator(pydart.World):
 
 
 class KneeQuadSimulator(pydart.World):
-    lb = [-math.pi / 2, -math.pi, -math.pi / 2, -math.pi, -math.pi / 2, -math.pi, -math.pi / 2, -math.pi] * 2
-    hb = [math.pi / 2, math.pi, math.pi / 2, math.pi, math.pi / 2, math.pi, math.pi / 2, math.pi] * 2
+    lb = [-math.pi / 4 -math.pi, -math.pi / 4, -math.pi, -math.pi / 4, -math.pi, -math.pi / 4, -math.pi] * 2
+    hb = [math.pi / 4, math.pi, math.pi / 4, math.pi, math.pi / 4, math.pi, math.pi / 4, math.pi] * 2
     numVars = 16
     string = "/Results/KneeQuad/KneeQuad/"
+
+    def getX0(self):
+        x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(self.numVars,))
+        # x0 = np.append(x0Short, (np.random.uniform(low = 0, high=2*math.pi, size = 1)))
+        return x0
     def __init__(self, inputVector):
         super(KneeQuadSimulator, self).__init__(0.0001, './data/skel/knee_quadriped.skel')
         self.controller = creature_controllers.KneeQuadController(self.skeletons[1], inputVector)
@@ -97,11 +102,11 @@ class LeftRightSymmetricCapsuleQuadSimulator(pydart.World):
     string = "/Results/LeftRightSymmetricCapsuleQuad/"
     def __init__(self, inputVector):
         super(LeftRightSymmetricCapsuleQuadSimulator, self).__init__(0.0001, './data/skel/knee_quadriped_capsule_leg.skel')
-        # try:
-        #     self.set_collision_detector(3)
-        # except Exception as e:
-        #     print('Does not have ODE collision detector, reverted to bullet collision detector')
-        #     self.set_collision_detector(2)
+        try:
+            self.set_collision_detector(3)
+        except Exception as e:
+            print('Does not have ODE collision detector, reverted to bullet collision detector')
+            self.set_collision_detector(2)
         self.controller = creature_controllers.LeftRightSymmetricCapsuleQuadController(self.skeletons[1], inputVector)
         self.skeletons[1].set_controller(self.controller)
     def getX0(self):
@@ -116,9 +121,12 @@ class LeftRightSymmetricWideFootQuadSimulator(pydart.World):
     simulatorType = "LeftRightSymmetricWideFootQuad"
     string = "/Results/LeftRightSymmetricWideFootQuad/"
     def __init__(self, inputVector):
+        # super(LeftRightSymmetricWideFootQuadSimulator, self).__init__(0.0001, './data/skel/wide_foot_quadriped_uniform_mass.skel')
         super(LeftRightSymmetricWideFootQuadSimulator, self).__init__(0.0001, './data/skel/wide_foot_quadriped.skel')
+
         self.controller = creature_controllers.LeftRightSymmetricWideFootQuadController(self.skeletons[1], inputVector)
         self.skeletons[1].set_controller(self.controller)
+        # print(self.skeletons[1].M.shape)
     def getX0(self):
         # x0 = []
         # for i in range(8):
