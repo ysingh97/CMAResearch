@@ -38,8 +38,8 @@ class KneeQuadSimulator(pydart.World):
     lb = [-math.pi / 4 -math.pi, -math.pi / 4, -math.pi, -math.pi / 4, -math.pi, -math.pi / 4, -math.pi] * 2
     hb = [math.pi / 4, math.pi, math.pi / 4, math.pi, math.pi / 4, math.pi, math.pi / 4, math.pi] * 2
     numVars = 16
-    string = "/Results/KneeQuad/KneeQuad/"
-
+    string = "/Results/KneeQuad/"
+    simulatorType = "KneeQuad"
     def getX0(self):
         x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(self.numVars,))
         # x0 = np.append(x0Short, (np.random.uniform(low = 0, high=2*math.pi, size = 1)))
@@ -158,6 +158,24 @@ class SymmetricWideFootQuadSimulator(pydart.World):
         # x0 = np.append(x0Short, (np.random.uniform(low = 0, high=2*math.pi, size = 1)))
         return x0
 
+class SpiderSimulator(pydart.World):
+    lb = [(-3 *math.pi) / 8] * 32
+    hb = [(3 *math.pi) / 8] * 32
+    numVars = 32
+    simulatorType = "Spider"
+    string = "/Results/Spider/"
+    def __init__(self, inputVector):
+        super(SpiderSimulator, self).__init__(0.0001, './data/skel/spider.skel')
+        try:
+            self.set_collision_detector(2)
+        except Exception as e:
+            print('Does not have ODE collision detector, reverted to bullet collision detector')
+            self.set_collision_detector(2)
+        self.controller = creature_controllers.SpiderController(self.skeletons[1], inputVector)
+        self.skeletons[1].set_controller(self.controller)
+    def getX0(self):
+        x0 = np.random.uniform(low=(-3 *math.pi) / 8, high=(3 *math.pi) / 8, size=(self.numVars,))
+        return x0
 
 
 
