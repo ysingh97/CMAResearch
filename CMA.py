@@ -27,20 +27,17 @@ GEN_COUNT = 0
 def fitnessFunction(inputVector):
     simulator = SIMULATOR(inputVector)
     initialPos = simulator.skeletons[1].q
-    try:
-        endPos = episode(simulator)
-        # result = 100000
-        if endPos is not None:
-            if endPos[4] < -.25:
-                return 100000, inputVector
-            result = endPos[3] - initialPos[3]
-            zDiff = abs(endPos[5] - initialPos[5])
-            fitness = result + 2 * zDiff
-            # print("Zdiff: ", zDiff, "XDiff: ", result, "EndPos: ", endPos, "Initial Pos: ", initialPos)
-            return fitness, inputVector
-        else:
+    endPos = episode(simulator)
+    # result = 100000
+    if endPos is not None:
+        if endPos[4] < -.25:
             return 100000, inputVector
-    except:
+        result = endPos[3] - initialPos[3]
+        zDiff = abs(endPos[5] - initialPos[5])
+        fitness = result + 2 * zDiff
+        # print("Zdiff: ", zDiff, "XDiff: ", result, "EndPos: ", endPos, "Initial Pos: ", initialPos)
+        return fitness, inputVector
+    else:
         return 100000, inputVector
 
 
