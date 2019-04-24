@@ -11,7 +11,7 @@ import os
 import sys
 
 SIMULATOR = Creature_Simulators.SpiderSimulator
-general_option = {'maxiter': 1, 'popsize': 60}
+general_option = {'maxiter': 40, 'popsize': 64}
 DURATION = 7
 
 OPTIONS = general_option
@@ -30,14 +30,16 @@ def fitnessFunction(inputVector):
     endPos = episode(simulator)
     # result = 100000
     if endPos is not None:
-        if endPos[4] < -.25:
-            return 100000, inputVector
+        # if endPos[4] < -.25:
+        #     print("")
+        #     return 100000, inputVector
         result = endPos[3] - initialPos[3]
         zDiff = abs(endPos[5] - initialPos[5])
         fitness = result + 2 * zDiff
         # print("Zdiff: ", zDiff, "XDiff: ", result, "EndPos: ", endPos, "Initial Pos: ", initialPos)
         return fitness, inputVector
     else:
+        print("simulation exploded")
         return 100000, inputVector
 
 
@@ -63,8 +65,8 @@ def episode(current_simulator):
         # print(current_simulator.t)
         current_simulator.step()
         curr_q = current_simulator.skeletons[1].q
-        if(curr_q[4] < -.25):
-            break
+        # if(curr_q[4] < -.25):
+        #     break
         # print("XPos: ", curr_q[3])
         if (abs(curr_q) > 10 ** 3).any():
             # print(curr_q)
@@ -92,7 +94,10 @@ def run_CMA(x0):
     global OPTIONS, FITNESS_FUNC, CPU_COUNT, GEN_COUNT
     es = CMAEvolutionStrategy(x0, CMA_STEP_SIZE, OPTIONS)
     pool = mp.Pool(CPU_COUNT)
+    iterations = 0
     while not es.stop():
+        print("Iteration: ", iterations)
+        iterations = iterations + 1
         currentPopulation = es.ask()
         print("Current Population: ")
         print(currentPopulation)
@@ -178,8 +183,8 @@ if __name__=='__main__':
     # print(end - start)
     # print(res.xbest)
     writeToFile(res, start, end)
-
-    # #
+    #
+    # # #
     testSimulator = SIMULATOR(res.xbest)
 
 
@@ -203,6 +208,8 @@ if __name__=='__main__':
     # testSimulator = SIMULATOR([0.46630226866904523, -0.09035613239452997, 0.41008355593203305, -0.6614990165896063, -0.6172943395187678,
     #  -0.7629010297653951, 0.5073885668913174, -0.21858281247631792, -0.2586085899441053, -0.5940746689855843,
     #  0.782851567370281, -0.3060416128977228])
+
+    # testSimulator = SIMULATOR([1.0670115279331265, 1.1598144474286394, -0.514242870136664, -0.31146579615717473, 0.4517698228688063, -1.1739772887777145, -0.49204429048671666, 0.06337142298621992, -0.03422055301062743, 1.123419064211913, -0.31789670714485785, -1.1719702481367804, -0.33461193867958, -0.6260286217585688, 1.0394054467355915, -1.1596272426421526, -1.0067150978511943, -1.1714252332488708, -1.130581210899738, -0.9683419332735748, -0.7828489093836879, -0.5037082814429639, -0.7977243769209161, -0.04131326058062912, -0.34909566597354663, -0.4933311648106006, 0.7936779933967666, -0.4690721636550621, -0.26378038022850603, -0.7197274025887086, 1.0049999106364145, 1.0418747882791384])
 
     # fitnessFunction([-0.514072698768841, 0.7563476359519834, 0.7082520951648874, 0.2749209360574305, -0.7602852837370209, -0.6225817927147496, 0.6219895615201269, 0.4865330914798499])
     pydart.gui.viewer.launch_pyqt5(testSimulator)
