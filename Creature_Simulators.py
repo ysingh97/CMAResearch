@@ -185,7 +185,7 @@ class BasicSpiderSimulator(pydart.World):
     simulatorType = "BasicSpider"
     string = "/Results/BasicSpider/"
     def __init__(self, inputVector):
-        super(SpiderSimulator, self).__init__(0.0001, './data/skel/spider.skel')
+        super(BasicSpiderSimulator, self).__init__(0.0001, './data/skel/spider.skel')
         try:
             self.set_collision_detector(2)
         except Exception as e:
