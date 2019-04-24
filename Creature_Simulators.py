@@ -177,5 +177,25 @@ class SpiderSimulator(pydart.World):
         x0 = np.random.uniform(low=(-3 *math.pi) / 8, high=(3 *math.pi) / 8, size=(self.numVars,))
         return x0
 
+class BasicSpiderSimulator(pydart.World):
+    numVars = 16
+    lb = [(-3 *math.pi) / 8] * numVars
+    hb = [(3 *math.pi) / 8] * numVars
+
+    simulatorType = "BasicSpider"
+    string = "/Results/BasicSpider/"
+    def __init__(self, inputVector):
+        super(SpiderSimulator, self).__init__(0.0001, './data/skel/spider.skel')
+        try:
+            self.set_collision_detector(2)
+        except Exception as e:
+            print('Does not have ODE collision detector, reverted to bullet collision detector')
+            self.set_collision_detector(2)
+        self.controller = creature_controllers.BasicSpiderController(self.skeletons[1], inputVector)
+        self.skeletons[1].set_controller(self.controller)
+    def getX0(self):
+        x0 = np.random.uniform(low=(-3 *math.pi) / 8, high=(3 *math.pi) / 8, size=(self.numVars,))
+        return x0
+
 
 
