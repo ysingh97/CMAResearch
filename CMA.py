@@ -64,16 +64,16 @@ FITNESS_FUNC =  fitnessFunction
 def episode(current_simulator):
 
     terminal_flag = False
-    while current_simulator.t < DURATION and not terminal_flag:
+    tumbled = False
+    while current_simulator.t < DURATION and (not terminal_flag or tumbled):
         # print(current_simulator.t)
         current_simulator.step()
         curr_q = current_simulator.skeletons[1].q
-        if (abs(curr_q) > 10 ** 3).any() or current_simulator.controller.getNormalDot() <= .9:
-            # print(curr_q)
-            # current_simulator.skeletons[1].controller.compute()
-            # current_simulator.skeletons[1].controller.pd_controller_target_compute()
+        if (abs(curr_q) > 10 ** 3).any():
             terminal_flag = True
             print("NAN")
+        if current_simulator.controller.getNormalDot() <= .9:
+            tumbled = True
     res = current_simulator.skeletons[1].q
     if terminal_flag:
         res = None
