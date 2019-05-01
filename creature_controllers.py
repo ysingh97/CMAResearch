@@ -31,6 +31,25 @@ class ThreeVarController(object):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
 
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
 
 # vector: [joint1Amp, joint2Amp, joint3Amp, joint4Amp, joint1Phase, joint2Phase, joint3Phase, joint4Phase, period]
 class NineVarController(object):
@@ -58,6 +77,25 @@ class NineVarController(object):
     def compute(self):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 # vector: [leg1_amplitude, leg1_phase, leg2_amplitude, leg2_phase, leg3_amplitude, leg3_phase, leg4_amplitude, leg4_phase]
 class SimpleQuadController(object):
@@ -88,6 +126,25 @@ class SimpleQuadController(object):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
 
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
 # vector: [leg1_amplitude, leg1_phase, leg2_amplitude, leg2_phase, leg3_amplitude, leg3_phase, leg4_amplitude, leg4_phase,
 # shin1_amplitude, shin1_phase, shin2_amplitude, shin2_phase, shin3_amplitude, shin3_phase, shin4_amplitude, shin4_phase]
 class KneeQuadController(object):
@@ -116,6 +173,25 @@ class KneeQuadController(object):
     def compute(self):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 # vector: [backleg_amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
 # frontshin_amplitude, frontshin_phase]
@@ -156,6 +232,25 @@ class SymmetricKneeQuadController(object):
         # print("offset: ", offsetDirection)
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 
 # vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
@@ -200,6 +295,25 @@ class LeftRightSymmetricKneeQuadController(object):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
 
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
 # vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
 # frontshin_amplitude, frontshin_phase, phase_difference]
 class LRSymmetricPhaseKneeQuadController(object):
@@ -239,6 +353,25 @@ class LRSymmetricPhaseKneeQuadController(object):
         # print("offset: ", offsetDirection)
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 # vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
 # frontshin_amplitude, frontshin_phase]
@@ -282,6 +415,25 @@ class LeftRightSymmetricCapsuleQuadController(object):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
 
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
 # vector: [backleg amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
 # frontshin_amplitude, frontshin_phase, backfoot_amplitude, backfoot_phase, frontfoot_amplitude, frontfoot_phase]
 class LeftRightSymmetricWideFootQuadController(object):
@@ -319,17 +471,27 @@ class LeftRightSymmetricWideFootQuadController(object):
         return (amplitude * np.sin(period * self.skel.world.t + phase))
 
     def compute(self):
-        rootNode = self.skel.bodynodes[0]
-        # center = rootNode.to_world([0, 0, 0])
-        # offsetDirection = rootNode.to_world([0, 1, 0]) - center
-        # offsetDirection = offsetDirection/np.linalg.norm(offsetDirection)
-        # print("center: ", center)
-        # print("offset: ", offsetDirection)
         self.target = self.update_target_poses()
-        # print(self.skel.M)
-        # print("compute shape: ", (-self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq).shape)
-        # return np.dot(self.skel.M, (-self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq))
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 # vector: [backleg_amplitude, backleg_phase, frontleg_amplitude, frontleg_phase, backshin_amplitude, backshin_phase,
 # frontshin_amplitude, frontshin_phase]
@@ -362,14 +524,27 @@ class SymmetricKneeQuadController(object):
         return (amplitude * np.sin(period * self.skel.world.t + phase))
 
     def compute(self):
+        self.target = self.update_target_poses()
+        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
         rootNode = self.skel.bodynodes[0]
         center = rootNode.to_world([0, 0, 0])
         offsetDirection = rootNode.to_world([0, 1, 0]) - center
-        offsetDirection = offsetDirection/np.linalg.norm(offsetDirection)
-        # print("center: ", center)
-        # print("offset: ", offsetDirection)
-        self.target = self.update_target_poses()
-        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot)
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
 
 
 # vector:  [row1BodyY_amp, row1BodyY_phase, row1BodyX_amp, row1BodyX_phase, row1Mid_amp, row1Mid_phase, row1End_amp, row1End_phase,
@@ -434,7 +609,31 @@ class SpiderController(object):
 
     def compute(self):
         self.target = self.update_target_poses()
+        self.getNormalDot()
+        # print("center: ", center)
+        # print("offset: ", offsetDirection)
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        print(dot, np.arccos(dot))
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
+
 
 
 class BasicSpiderController(object):
@@ -496,3 +695,23 @@ class BasicSpiderController(object):
     def compute(self):
         self.target = self.update_target_poses()
         return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        # print(dot, np.arccos(dot))
+        # print(np.arccos(dot))
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection

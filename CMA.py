@@ -10,7 +10,7 @@ import math
 import os
 import sys
 
-SIMULATOR = Creature_Simulators.BasicSpiderSimulator
+SIMULATOR = Creature_Simulators.SpiderSimulator
 general_option = {'maxiter': 25, 'popsize': 32}
 DURATION = 7
 
@@ -28,6 +28,7 @@ def fitnessFunction(inputVector):
     simulator = SIMULATOR(inputVector)
     initialPos = simulator.skeletons[1].q
     endPos = episode(simulator)
+
     # result = 100000
     if endPos is not None:
         # if endPos[4] < -.25:
@@ -36,6 +37,8 @@ def fitnessFunction(inputVector):
         result = endPos[3] - initialPos[3]
         zDiff = abs(endPos[5] - initialPos[5])
         fitness = result + 2 * zDiff
+        normalDot = simulator.controller.getNormalDot()
+        fitness = fitness + (1-normalDot)*1000
         # print("Zdiff: ", zDiff, "XDiff: ", result, "EndPos: ", endPos, "Initial Pos: ", initialPos)
         return fitness, inputVector
     else:
@@ -65,10 +68,7 @@ def episode(current_simulator):
         # print(current_simulator.t)
         current_simulator.step()
         curr_q = current_simulator.skeletons[1].q
-        # if(curr_q[4] < -.25):
-        #     break
-        # print("XPos: ", curr_q[3])
-        if (abs(curr_q) > 10 ** 3).any():
+        if (abs(curr_q) > 10 ** 3).any() or current_simulator.controller.getNormalDot() <= .9:
             # print(curr_q)
             # current_simulator.skeletons[1].controller.compute()
             # current_simulator.skeletons[1].controller.pd_controller_target_compute()
@@ -173,19 +173,19 @@ if __name__=='__main__':
     # print(PATH)
     os.mkdir(path)
     # # # #
-    # x0 = SIMULATOR.getX0(SIMULATOR)
-    # # # x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(SIMULATOR.numVars,))
-    # print(x0)
-    # # # # #
-    # start = time.time()
-    # res = run_CMA(x0)
-    # end = time.time()
-    # # print(end - start)
-    # # print(res.xbest)
-    # writeToFile(res, start, end)
-    # #
+    x0 = SIMULATOR.getX0(SIMULATOR)
+    # # x0 = np.random.uniform(low=-math.pi / 4, high=math.pi / 4, size=(SIMULATOR.numVars,))
+    print(x0)
     # # # #
-    # testSimulator = SIMULATOR(res.xbest)
+    start = time.time()
+    res = run_CMA(x0)
+    end = time.time()
+    # print(end - start)
+    # print(res.xbest)
+    writeToFile(res, start, end)
+    #
+    # # #
+    testSimulator = SIMULATOR(res.xbest)
 
 
     #20 iterations, pop 16 , LRWideFoot
@@ -209,8 +209,11 @@ if __name__=='__main__':
     #  -0.7629010297653951, 0.5073885668913174, -0.21858281247631792, -0.2586085899441053, -0.5940746689855843,
     #  0.782851567370281, -0.3060416128977228])
 
-    testSimulator = SIMULATOR([0.3723501318863691, 1.1678595960839597, -0.1569258221476587, 0.24495637346806864, 1.0778045197202937, -0.9855109443998904, 1.0583464289299256, -0.08774364762497212, -1.1149586949514558, -1.134175398994463, 0.9257096084594617, -0.372952021676588, -1.0372699989256868, -0.8387960147903675, 0.5883142027970178, 0.6971646208739037, 0.5136742069811631, -0.5505050908529391, 1.0925744326681441, -0.026458244859809965, 1.0870814597191574, 0.0931135915468222, -0.37946413309817023, 0.21809491862819586, 0.6342053472769811, -0.7728460968456383, 1.0101824139530957, -0.9448652418916719, 0.31985896023026333, -0.5434757655339815, 0.6238802853909565, -0.9290562998005504])
-    # fitnessFunction([-0.514072698768841, 0.7563476359519834, 0.7082520951648874, 0.2749209360574305, -0.7602852837370209, -0.6225817927147496, 0.6219895615201269, 0.4865330914798499])
+    #spider all dof
+    # testSimulator = SIMULATOR([0.3723501318863691, 1.1678595960839597, -0.1569258221476587, 0.24495637346806864, 1.0778045197202937, -0.9855109443998904, 1.0583464289299256, -0.08774364762497212, -1.1149586949514558, -1.134175398994463, 0.9257096084594617, -0.372952021676588, -1.0372699989256868, -0.8387960147903675, 0.5883142027970178, 0.6971646208739037, 0.5136742069811631, -0.5505050908529391, 1.0925744326681441, -0.026458244859809965, 1.0870814597191574, 0.0931135915468222, -0.37946413309817023, 0.21809491862819586, 0.6342053472769811, -0.7728460968456383, 1.0101824139530957, -0.9448652418916719, 0.31985896023026333, -0.5434757655339815, 0.6238802853909565, -0.9290562998005504])
+    
+    #just first joints
+    # testSimulator = SIMULATOR([0.7303540117359049, 1.029788001017416, 1.0038273549565444, 0.9221910710583081, 1.1456469751809306, 0.3914514738142889, 1.0071479857942354, 1.084099216318121, -0.9272175820503881, -0.799735512437346, 1.1707966213883096, 0.8732789726661583, -0.22481711454391462, -1.1151194436722058, 0.4227663555348966, 0.7442111131633926])
     pydart.gui.viewer.launch_pyqt5(testSimulator)
 
 

@@ -176,6 +176,16 @@ class SpiderSimulator(pydart.World):
     def getX0(self):
         x0 = np.random.uniform(low=(-3 *math.pi) / 8, high=(3 *math.pi) / 8, size=(self.numVars,))
         return x0
+    # def render_with_ri(self, ri):
+    #     p0, p1 = self.controller.getNormalEndpoints()
+    #     print(p0, p1)
+    #     if p0 is not None and p1 is not None:
+    #         ri.set_color(1.0, 0.0, 0.0)
+    #         ri.render_arrow(p0, p1, r_base=0.05, head_width=0.1, head_len=0.1)
+        # if self.force is not None and self.duration >= 0:
+        #     p0 = self.skeletons[1].body('h_spine').C
+        #     p1 = p0 + 0.01 * self.force
+
 
 class BasicSpiderSimulator(pydart.World):
     numVars = 16
