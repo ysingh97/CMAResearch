@@ -558,49 +558,50 @@ class SpiderController(object):
         self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
         self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
         self.vector = vector
+        self.period = 2*math.pi
 
     def update_target_poses(self):
         pose = self.skel.q
 
-        pose[('leg1_joint_1')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
-        pose[('leg1_joint_2')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
-        pose[('leg1Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
-        pose[('leg1End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        pose[('leg1_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1])
+        pose[('leg1_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
+        pose[('leg1Mid_joint')] = self.periodic(self.vector[4], self.period, self.vector[5])
+        pose[('leg1End_joint')] = self.periodic(self.vector[6], self.period, self.vector[7])
 
-        pose[('leg2_joint_1')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
-        pose[('leg2_joint_2')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
-        pose[('leg2Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
-        pose[('leg2End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        pose[('leg2_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1])
+        pose[('leg2_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
+        pose[('leg2Mid_joint')] = self.periodic(self.vector[4], self.period, self.vector[5])
+        pose[('leg2End_joint')] = self.periodic(self.vector[6],self.period, self.vector[7])
 
-        pose[('leg3_joint_1')] = self.periodic(self.vector[8], math.pi / 2, self.vector[9])
-        pose[('leg3_joint_2')] = self.periodic(self.vector[10], math.pi / 2, self.vector[11])
-        pose[('leg3Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
-        pose[('leg3End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+        pose[('leg3_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9])
+        pose[('leg3_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
+        pose[('leg3Mid_joint')] = self.periodic(self.vector[12], self.period, self.vector[13])
+        pose[('leg3End_joint')] = self.periodic(self.vector[14], self.period, self.vector[15])
 
-        pose[('leg4_joint_1')] = self.periodic(self.vector[8], math.pi / 2, self.vector[9])
-        pose[('leg4_joint_2')] = self.periodic(self.vector[10], math.pi / 2, self.vector[11])
-        pose[('leg4Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
-        pose[('leg4End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+        pose[('leg4_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9])
+        pose[('leg4_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
+        pose[('leg4Mid_joint')] = self.periodic(self.vector[12], self.period, self.vector[13])
+        pose[('leg4End_joint')] = self.periodic(self.vector[14], self.period, self.vector[15])
 
-        pose[('leg5_joint_1')] = self.periodic(self.vector[16], math.pi / 2, self.vector[17])
-        pose[('leg5_joint_2')] = self.periodic(self.vector[18], math.pi / 2, self.vector[19])
-        pose[('leg5Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
-        pose[('leg5End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
+        pose[('leg5_joint_1')] = self.periodic(self.vector[16], self.period, self.vector[17])
+        pose[('leg5_joint_2')] = self.periodic(self.vector[18], self.period, self.vector[19])
+        pose[('leg5Mid_joint')] = self.periodic(self.vector[20], self.period, self.vector[21])
+        pose[('leg5End_joint')] = self.periodic(self.vector[22], self.period, self.vector[23])
 
-        pose[('leg6_joint_1')] = self.periodic(self.vector[16], math.pi / 2, self.vector[17])
-        pose[('leg6_joint_2')] = self.periodic(self.vector[18], math.pi / 2, self.vector[19])
-        pose[('leg6Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
-        pose[('leg6End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
+        pose[('leg6_joint_1')] = self.periodic(self.vector[16], self.period, self.vector[17])
+        pose[('leg6_joint_2')] = self.periodic(self.vector[18], self.period, self.vector[19])
+        pose[('leg6Mid_joint')] = self.periodic(self.vector[20], self.period, self.vector[21])
+        pose[('leg6End_joint')] = self.periodic(self.vector[22], self.period, self.vector[23])
 
-        pose[('leg7_joint_1')] = self.periodic(self.vector[24], math.pi / 2, self.vector[25])
-        pose[('leg7_joint_2')] = self.periodic(self.vector[26], math.pi / 2, self.vector[27])
-        pose[('leg7Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
-        pose[('leg7End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
+        pose[('leg7_joint_1')] = self.periodic(self.vector[24], self.period, self.vector[25])
+        pose[('leg7_joint_2')] = self.periodic(self.vector[26], self.period, self.vector[27])
+        pose[('leg7Mid_joint')] = self.periodic(self.vector[28], self.period, self.vector[29])
+        pose[('leg7End_joint')] = self.periodic(self.vector[30], self.period, self.vector[31])
 
-        pose[('leg8_joint_1')] = self.periodic(self.vector[24], math.pi / 2, self.vector[25])
-        pose[('leg8_joint_2')] = self.periodic(self.vector[26], math.pi / 2, self.vector[27])
-        pose[('leg8Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
-        pose[('leg8End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
+        pose[('leg8_joint_1')] = self.periodic(self.vector[24], self.period, self.vector[25])
+        pose[('leg8_joint_2')] = self.periodic(self.vector[26], self.period, self.vector[27])
+        pose[('leg8Mid_joint')] = self.periodic(self.vector[28], self.period, self.vector[29])
+        pose[('leg8End_joint')] = self.periodic(self.vector[30], self.period, self.vector[31])
 
         return pose
 
@@ -643,47 +644,129 @@ class BasicSpiderController(object):
         self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
         self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
         self.vector = vector
+        self.period = 2*math.pi
 
     def update_target_poses(self):
         pose = self.skel.q
 
-        pose[('leg1_joint_1')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
-        pose[('leg1_joint_2')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
+        pose[('leg1_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1])
+        pose[('leg1_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
         # pose[('leg1Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
         # pose[('leg1End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
 
-        pose[('leg2_joint_1')] = self.periodic(self.vector[0], math.pi / 2, self.vector[1])
-        pose[('leg2_joint_2')] = self.periodic(self.vector[2], math.pi / 2, self.vector[3])
+        pose[('leg2_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1])
+        pose[('leg2_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
         # pose[('leg2Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
         # pose[('leg2End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
 
-        pose[('leg3_joint_1')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
-        pose[('leg3_joint_2')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        pose[('leg3_joint_1')] = self.periodic(self.vector[4], self.period, self.vector[5])
+        pose[('leg3_joint_2')] = self.periodic(self.vector[6], self.period, self.vector[7])
         # pose[('leg3Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
         # pose[('leg3End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
 
-        pose[('leg4_joint_1')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
-        pose[('leg4_joint_2')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+        pose[('leg4_joint_1')] = self.periodic(self.vector[4], self.period, self.vector[5])
+        pose[('leg4_joint_2')] = self.periodic(self.vector[6], self.period, self.vector[7])
         # pose[('leg4Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
         # pose[('leg4End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
 
-        pose[('leg5_joint_1')] = self.periodic(self.vector[8], math.pi / 2, self.vector[9])
-        pose[('leg5_joint_2')] = self.periodic(self.vector[10], math.pi / 2, self.vector[11])
+        pose[('leg5_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9])
+        pose[('leg5_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
         # pose[('leg5Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
         # pose[('leg5End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
 
-        pose[('leg6_joint_1')] = self.periodic(self.vector[8], math.pi / 2, self.vector[9])
-        pose[('leg6_joint_2')] = self.periodic(self.vector[10], math.pi / 2, self.vector[11])
+        pose[('leg6_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9])
+        pose[('leg6_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
         # pose[('leg6Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
         # pose[('leg6End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
 
-        pose[('leg7_joint_1')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
-        pose[('leg7_joint_2')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+        pose[('leg7_joint_1')] = self.periodic(self.vector[12], self.period, self.vector[13])
+        pose[('leg7_joint_2')] = self.periodic(self.vector[14], self.period, self.vector[15])
         # pose[('leg7Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
         # pose[('leg7End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
 
-        pose[('leg8_joint_1')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
-        pose[('leg8_joint_2')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+        pose[('leg8_joint_1')] = self.periodic(self.vector[12], self.period, self.vector[13])
+        pose[('leg8_joint_2')] = self.periodic(self.vector[14], self.period, self.vector[15])
+        # pose[('leg8Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
+        # pose[('leg8End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
+
+        return pose
+
+    def periodic(self, amplitude, period, phase):
+        return (amplitude * np.sin(period * self.skel.world.t + phase))
+
+    def compute(self):
+        self.target = self.update_target_poses()
+        return -self.Kp * (self.skel.q - self.target) - self.Kd * self.skel.dq
+
+    def getNormalUpward(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 1, 0]) - center
+        normal = offsetDirection / np.linalg.norm(offsetDirection)
+        return normal
+
+    def getNormalDot(self):
+        normal = self.getNormalUpward()
+        dot = np.dot(normal, np.array([0, 1, 0]))
+        # print(dot, np.arccos(dot))
+        # print(np.arccos(dot))
+        return dot
+
+    def getNormalEndpoints(self):
+        rootNode = self.skel.bodynodes[0]
+        center = rootNode.to_world([0, 0, 0])
+        offsetDirection = rootNode.to_world([0, 5, 0])
+        return center, offsetDirection
+
+class BasicSpiderController180(object):
+    def __init__(self, skel, vector):
+        self.skel = skel
+        self.target = None
+        self.Kp = np.array([0.0] * 6 + [400.0] * (self.skel.ndofs - 6))
+        self.Kd = np.array([0.0] * 6 + [40.0] * (self.skel.ndofs - 6))
+        self.vector = vector
+        self.period = 2*math.pi
+
+    def update_target_poses(self):
+        pose = self.skel.q
+
+        pose[('leg1_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1])
+        pose[('leg1_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
+        # pose[('leg1Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
+        # pose[('leg1End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+
+        pose[('leg2_joint_1')] = self.periodic(self.vector[0], self.period, self.vector[1] + math.pi/2)
+        pose[('leg2_joint_2')] = self.periodic(self.vector[2], self.period, self.vector[3])
+        # pose[('leg2Mid_joint')] = self.periodic(self.vector[4], math.pi / 2, self.vector[5])
+        # pose[('leg2End_joint')] = self.periodic(self.vector[6], math.pi / 2, self.vector[7])
+
+        pose[('leg3_joint_1')] = self.periodic(self.vector[4], self.period, self.vector[5])
+        pose[('leg3_joint_2')] = self.periodic(self.vector[6], self.period, self.vector[7])
+        # pose[('leg3Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
+        # pose[('leg3End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+
+        pose[('leg4_joint_1')] = self.periodic(self.vector[4], self.period, self.vector[5] + math.pi/2)
+        pose[('leg4_joint_2')] = self.periodic(self.vector[6], self.period, self.vector[7])
+        # pose[('leg4Mid_joint')] = self.periodic(self.vector[12], math.pi / 2, self.vector[13])
+        # pose[('leg4End_joint')] = self.periodic(self.vector[14], math.pi / 2, self.vector[15])
+
+        pose[('leg5_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9])
+        pose[('leg5_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
+        # pose[('leg5Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
+        # pose[('leg5End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
+
+        pose[('leg6_joint_1')] = self.periodic(self.vector[8], self.period, self.vector[9] + math.pi/2)
+        pose[('leg6_joint_2')] = self.periodic(self.vector[10], self.period, self.vector[11])
+        # pose[('leg6Mid_joint')] = self.periodic(self.vector[20], math.pi / 2, self.vector[21])
+        # pose[('leg6End_joint')] = self.periodic(self.vector[22], math.pi / 2, self.vector[23])
+
+        pose[('leg7_joint_1')] = self.periodic(self.vector[12], self.period, self.vector[13])
+        pose[('leg7_joint_2')] = self.periodic(self.vector[14], self.period, self.vector[15])
+        # pose[('leg7Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
+        # pose[('leg7End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
+
+        pose[('leg8_joint_1')] = self.periodic(self.vector[12], self.period, self.vector[13] + math.pi/2)
+        pose[('leg8_joint_2')] = self.periodic(self.vector[14], self.period, self.vector[15])
         # pose[('leg8Mid_joint')] = self.periodic(self.vector[28], math.pi / 2, self.vector[29])
         # pose[('leg8End_joint')] = self.periodic(self.vector[30], math.pi / 2, self.vector[31])
 

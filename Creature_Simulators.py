@@ -4,6 +4,7 @@ import math
 import time
 import numpy as np
 import random
+from pydart2.contact import Contact
 
 class ThreeVarSimulator(pydart.World):
     numVars = 3
@@ -185,6 +186,20 @@ class SpiderSimulator(pydart.World):
         # if self.force is not None and self.duration >= 0:
         #     p0 = self.skeletons[1].body('h_spine').C
         #     p1 = p0 + 0.01 * self.force
+
+    def render(self,
+               render_markers=True,
+               render_contacts=False,
+               render_contact_size=0.01,
+               render_contact_force_scale=-0.005):
+        super(SpiderSimulator, self).render(render_markers, render_contacts, render_contact_size, render_contact_force_scale)
+
+        p0, p1 = self.controller.getNormalEndpoints()
+        test_vec = np.array([0, 100, 0])
+        fake_contact = Contact(self, np.concatenate([p0, 100*(p1-p0), [0, 0, 0, 0]]))
+
+        fake_contact.render(size=render_contact_size,
+                            scale=-render_contact_force_scale)
 
 
 class BasicSpiderSimulator(pydart.World):
