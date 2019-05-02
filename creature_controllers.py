@@ -625,7 +625,7 @@ class SpiderController(object):
     def getNormalDot(self):
         normal = self.getNormalUpward()
         dot = np.dot(normal, np.array([0, 1, 0]))
-        print(dot, np.arccos(dot))
+        # print(dot, np.arccos(dot))
         return dot
 
     def getNormalEndpoints(self):
